@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:sandaru/combo_screen.dart';
-import 'combo_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

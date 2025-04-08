@@ -66,6 +66,10 @@ flutter:
      - assets/fruit_basket.png
      - assets/salad.png
      - assets/bery.png
+     - assets/diliver.png
+     - assets/order.png
+     - assets/prepared.png
+     - assets/map_sample.png
      
 
 
