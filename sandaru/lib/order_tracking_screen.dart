@@ -6,26 +6,36 @@ class OrderTrackingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFDFDFD),
+      backgroundColor: const Color(0xFFF7F7F7),
       body: SafeArea(
         child: Column(
           children: [
             // Header
             Container(
-              padding: const EdgeInsets.all(20),
-              color: const Color(0xFFFFA726),
+              padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
+              decoration: BoxDecoration(
+                color: const Color(0xFFFFA726),
+                borderRadius: const BorderRadius.only(
+                  bottomLeft: Radius.circular(20),
+                  bottomRight: Radius.circular(20),
+                ),
+              ),
               child: Row(
                 children: [
                   GestureDetector(
                     onTap: () => Navigator.pop(context),
-                    child: const Icon(Icons.arrow_back, color: Colors.white),
+                    child: const Icon(
+                      Icons.arrow_back,
+                      color: Colors.white,
+                      size: 28,
+                    ),
                   ),
-                  const SizedBox(width: 12),
+                  const SizedBox(width: 16),
                   const Text(
                     "Delivery Status",
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 20,
+                      fontSize: 22,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -49,15 +59,15 @@ class OrderTrackingScreen extends StatelessWidget {
                   _buildStatusItem(
                     imagePath: 'assets/diliver.png',
                     title: "Order Is Being Delivered",
-                    subtitle: "Your delivery agent is coming",
+                    subtitle: "Your delivery agent is on the way",
                     isInProgress: true,
                   ),
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 20),
                   ClipRRect(
                     borderRadius: BorderRadius.circular(16),
                     child: Image.asset(
                       'assets/map_sample.png',
-                      height: 160,
+                      height: 200,
                       width: double.infinity,
                       fit: BoxFit.cover,
                     ),
@@ -89,64 +99,82 @@ class OrderTrackingScreen extends StatelessWidget {
 
     if (isCompleted) {
       borderColor = Colors.green;
-      trailing = const Icon(Icons.check_circle, color: Colors.green);
+      trailing = const Icon(Icons.check_circle, color: Colors.green, size: 24);
     } else if (isInProgress) {
       borderColor = Colors.orange;
-      trailing = const Icon(Icons.phone_in_talk_rounded, color: Colors.orange);
+      trailing = const Icon(
+        Icons.phone_in_talk_rounded,
+        color: Colors.orange,
+        size: 24,
+      );
     } else {
       borderColor = Colors.grey;
-      trailing = const Icon(Icons.radio_button_unchecked, color: Colors.grey);
+      trailing = const Icon(
+        Icons.radio_button_unchecked,
+        color: Colors.grey,
+        size: 24,
+      );
     }
 
-    return Column(
-      children: [
-        Row(
-          children: [
-            Container(
-              padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(12),
-                border: Border.all(
-                  color: borderColor.withOpacity(0.5),
-                  width: 1.5,
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 24),
+      child: Row(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(
+                color: borderColor.withOpacity(0.4),
+                width: 1.5,
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.1),
+                  spreadRadius: 2,
+                  blurRadius: 6,
+                  offset: Offset(0, 2),
                 ),
-              ),
-              child: Image.asset(
-                imagePath,
-                height: 32,
-                width: 32,
-                fit: BoxFit.contain,
-              ),
+              ],
             ),
-            const SizedBox(width: 16),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    title,
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                    ),
+            child: Image.asset(
+              imagePath,
+              height: 36,
+              width: 36,
+              fit: BoxFit.contain,
+            ),
+          ),
+          const SizedBox(width: 20),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.black87,
                   ),
-                  if (subtitle != null)
-                    Text(
+                ),
+                if (subtitle != null)
+                  Padding(
+                    padding: const EdgeInsets.only(top: 4),
+                    child: Text(
                       subtitle,
                       style: const TextStyle(
-                        fontSize: 13,
+                        fontSize: 14,
                         color: Colors.black54,
                       ),
                     ),
-                ],
-              ),
+                  ),
+              ],
             ),
-            trailing,
-          ],
-        ),
-        const SizedBox(height: 24),
-      ],
+          ),
+          trailing,
+        ],
+      ),
     );
   }
 }
